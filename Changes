@@ -1,6 +1,10 @@
 Change log for POE::Component::SmokeBox::Uploads::NNTP
 ======================================================
 
+1.00	Sun Jun  7 16:36:43 BST 2009
+	- Makefile.PL meta updates
+	- POD tidying
+
 0.08	Fri Sep 19 14:53:23 BST 2008
 	- Updated required version of Client::NNTP.
 	- Added another test script.

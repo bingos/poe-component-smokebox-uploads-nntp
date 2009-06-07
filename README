@@ -32,7 +32,7 @@ SYNOPSIS
 DESCRIPTION
     POE::Component::SmokeBox::Uploads::NNTP is a POE component that alerts
     newly uploaded CPAN distributions. It obtains this information from
-    polling an NNTP server ( by default the "perl.cpan.testers" group on
+    polling an NNTP server ( by default the "perl.cpan.uploads" group on
     "nntp.perl.org" ).
 
     POE::Component::Client::NNTP is used to handle the interaction with the
@@ -73,10 +73,19 @@ OUTPUT EVENTS
 AUTHOR
     Chris "BinGOs" Williams <chris@bingosnet.co.uk>
 
+LICENSE
+    Copyright (C) Chris Williams
+
+    This module may be used, modified, and distributed under the same terms
+    as Perl itself. Please see the license that came with your Perl
+    distribution for details.
+
 SEE ALSO
     POE
 
     POE::Component::Client::NNTP
 
     <http://www.nntp.perl.org/>
+
+    <http://log.perl.org/2008/02/goodbye-cpan-te.html>
 

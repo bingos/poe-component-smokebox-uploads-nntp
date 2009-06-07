@@ -7,7 +7,7 @@ use POE qw(Component::Client::NNTP);
 use Email::Simple;
 use vars qw($VERSION);
 
-$VERSION = '0.08';
+$VERSION = '1.00';
 
 sub spawn {
   my $package = shift;
@@ -201,7 +201,7 @@ L<POE::Component::Client::NNTP> is used to handle the interaction with the NNTP 
 
 =over
 
-=item spawn
+=item C<spawn>
 
 Takes a number of parameters:
 
@@ -219,11 +219,11 @@ Returns an object.
 
 =over 
 
-=item session_id
+=item C<session_id>
 
 Returns the POE::Session ID of the component.
 
-=item shutdown
+=item C<shutdown>
 
 Terminates the component.
 
@@ -233,7 +233,7 @@ Terminates the component.
 
 =over 
 
-=item shutdown
+=item C<shutdown>
 
 Terminates the component.
 
@@ -254,7 +254,7 @@ Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
 
 =head1 LICENSE
 
-Copyright (C) Chris Williams
+Copyright E<copy> Chris Williams
 
 This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
@@ -267,3 +267,5 @@ L<POE::Component::Client::NNTP>
 L<http://www.nntp.perl.org/>
 
 L<http://log.perl.org/2008/02/goodbye-cpan-te.html>
+
+=cut
