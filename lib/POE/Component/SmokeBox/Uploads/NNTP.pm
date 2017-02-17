@@ -1,13 +1,12 @@
 package POE::Component::SmokeBox::Uploads::NNTP;
 
+#ABSTRACT: Obtain uploaded CPAN modules via NNTP.
+
 use strict;
 use warnings;
 use Carp;
 use POE qw(Component::Client::NNTP);
 use Email::Simple;
-use vars qw($VERSION);
-
-$VERSION = '1.00';
 
 sub spawn {
   my $package = shift;
@@ -20,10 +19,10 @@ sub spawn {
   my $self = bless \%opts, $package;
   $self->{session_id} = POE::Session->create(
         object_states => [
-	   $self => { shutdown        => '_shutdown', 
+	   $self => { shutdown        => '_shutdown',
 		      connect         => '_connect',
 		      poll	      => '_poll',
-		      nntp_registered => '_nntp_registered', 
+		      nntp_registered => '_nntp_registered',
 		      nntp_socketerr  => '_nntp_socketerr',
 		      nntp_disconnected => '_nntp_disconnected',
 		      nntp_200	      => '_nntp_200',
@@ -51,7 +50,7 @@ sub shutdown {
 sub _shutdown {
   my ($kernel,$self) = @_[KERNEL,OBJECT];
   $kernel->alias_remove( $_ ) for $kernel->alias_list();
-  $kernel->refcount_decrement( $self->{session_id}, __PACKAGE__ ) unless $self->{alias};  
+  $kernel->refcount_decrement( $self->{session_id}, __PACKAGE__ ) unless $self->{alias};
   $kernel->refcount_decrement( $self->{sender_id}, __PACKAGE__ );
   $kernel->post( $self->{nntpclient}->session_id(), 'shutdown' );
   return;
@@ -77,7 +76,7 @@ sub _start {
   }
   $kernel->refcount_increment( $sender_id, __PACKAGE__ );
   $self->{sender_id} = $sender_id;
-  $self->{nntpclient} = POE::Component::Client::NNTP->spawn( 'nntp' . $self->{session_id}, 
+  $self->{nntpclient} = POE::Component::Client::NNTP->spawn( 'nntp' . $self->{session_id},
 	{ NNTPServer => $self->{nntp}, Port => $self->{nntp_port} } );
   return;
 }
@@ -156,11 +155,8 @@ sub _dispatch {
 }
 
 1;
-__END__
 
-=head1 NAME
-
-POE::Component::SmokeBox::Uploads::NNTP - Obtain uploaded CPAN modules via NNTP.
+=pod
 
 =head1 SYNOPSIS
 
@@ -207,7 +203,7 @@ Takes a number of parameters:
 
   'event', the event handler in your session where each new upload alert should be sent, mandatory;
   'session', optional if the poco is spawned from within another session;
-  
+
 The 'session' parameter is only required if you wish the output event to go to a different
 session than the calling session, or if you have spawned the poco outside of a session.
 
@@ -241,22 +237,12 @@ Terminates the component.
 
 =head1 OUTPUT EVENTS
 
-An event will be triggered for each new CPAN upload. The event will have ARG0 set to the path of the 
+An event will be triggered for each new CPAN upload. The event will have ARG0 set to the path of the
 upload:
 
   B/BI/BINGOS/POE-Component-SmokeBox-Uploads-NNTP-0.01.tar.gz
 
 Suitable for feeding to the smoke tester of your choice.
-
-=head1 AUTHOR
-
-Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
-
-=head1 LICENSE
-
-Copyright E<copy> Chris Williams
-
-This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
 =head1 SEE ALSO
 
